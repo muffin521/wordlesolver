@@ -11,6 +11,7 @@ while len(green) != 5:
 # get yellow letters
 yellow = raw_input('what are your yellow letters? do not enter any characters other than the letters. if none, hit enter or simply type \".\"\n')
 
+gray = raw_input('what are the gray letters? These are the ones that cannot be in the word. If none, simply type \'.\'\n')
 
 # find all strings that match input
 with open('valid-wordle-words.txt', 'r') as fp:
@@ -24,14 +25,29 @@ with open('valid-wordle-words.txt', 'r') as fp:
             words.append(add)
 
 # only add things that also match yellow letters
-goodwords = []
+yellowwords = []
 
-if yellow != '.':
+if yellow == '.':
+    yellowwords = words
+else:
     for i in words:
         for c in yellow:
             index = i.find(c)
 
             if index != -1:
+                yellowwords.append(i)
+
+# remove anything that matches a gray letter
+goodwords = []
+
+if gray == '.':
+    goodwords = yellowwords
+else:
+    for i in yellowwords:
+        for c in gray:
+            index = i.find(c)
+            
+            if index == -1:
                 goodwords.append(i)
 
 
