@@ -2,24 +2,28 @@ import re
 
 words = []
 
+# get input, loop if len != 5 (aka not a valid wordle word)
 green = raw_input('what are your green letters? input \".\" if you do not have a green letter for that position\n')
 while len(green) != 5:
     print("not a valid input")
     green = raw_input('what are your green letters? input \".\" if you do not have a green letter for that position\n')
 
+# get yellow letters
 yellow = raw_input('what are your yellow letters? do not enter any characters other than the letters. if none, hit enter or simply type \".\"\n')
 
 
-
+# find all strings that match input
 with open('valid-wordle-words.txt', 'r') as fp:
     for line in fp:
         word = re.findall(green, line)
         if word:
             add = word[0]
+            # make pretty (remove [])
             add.replace ('[', '').replace(']','')
 
             words.append(add)
 
+# only add things that also match yellow letters
 goodwords = []
 
 if yellow != '.':
@@ -31,9 +35,11 @@ if yellow != '.':
                 goodwords.append(i)
 
 
+# output
 print('Possible words:')
 
 for i in goodwords:
+    # aesthetics again
     i.strip()
     print(i)
 if len(goodwords) == 0:
