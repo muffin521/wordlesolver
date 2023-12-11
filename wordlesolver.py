@@ -21,84 +21,7 @@ yellowwords = []
 #remove gray letters, left with only good words!
 goodwords = []
 
-
-# find all strings that match input
-# with open('valid-wordle-words.txt', 'r') as fp:
-#     if green == '.....' or green == '.':
-#         for line in fp:
-#             # for each line, add to words list. this adds ALL words to list
-#             wordleword = fp.readline()
-#             wordleword.replace ('[', '').replace(']','')
-#             words.append(wordleword)
-        
-#         #if yellow is also blank, blehh
-#         if yellow == '.':
-#             # do something
-#             if gray == '.':
-#                 goodwords.append('every word is valid')
-#             else:
-#                 for i in words: # for each word in words list
-#                     for c in gray: # per letter in gray
-#                         index = i.find(c) #check if letter c exists in word i
-                        
-#                         if index == -1: #if it does NOT exist, we keep it
-#                             goodwords.append(i)
-
-#                 #for loop done, good words only left!
-#                 if len(goodwords) == 0:
-#                     print('No valid words')
-#                 else: #if len != 0, aka words exist :P
-#                     for i in goodwords:
-#                         # aesthetics again
-#                         i.strip()
-#                         print(i)
-        
-#         #if yellow contains letters!
-#         else:
-#             for i in words: # per word in words list
-#                 for c in yellow: # per letter in yellow
-#                     index = i.find(c) #check if letter c exists in word i
-
-#                     # if yes, add to yellowwords!
-#                     if index != -1:
-#                         yellowwords.append(i)
-            
-#             #if gray = '.'
-#             if gray == '.':
-#                 print('Possible words:')
-
-#                 if len(yellowwords) == 0:
-#                     print('No valid words')
-#                 else: #if len != 0, aka words exist :P
-#                     for i in yellowwords:
-#                         # aesthetics again
-#                         i.strip()
-#                         print(i)
-                
-#             #if we DO have stuff in gray
-#             else: 
-#                 for i in yellowwords: # for each word in yellowwords list
-#                     for c in gray: # per letter in gray
-#                         index = i.find(c) #check if letter c exists in word i
-                        
-#                         if index == -1: #if it does NOT exist, we keep it
-#                             goodwords.append(i)
-
-#                 #for loop done, good words only left!
-#                 if len(goodwords) == 0:
-#                     print('No valid words')
-#                 else: #if len != 0, aka words exist :P
-#                     for i in goodwords:
-#                         # aesthetics again
-#                         i.strip()
-#                         print(i)
-
-
-
-
-
-
-###-----------OLD CODE-----------###
+###-----------MAIN-----------###
 with open('valid-wordle-words.txt', 'r') as fp:
     for line in fp:
         if green == '.....':
@@ -136,13 +59,15 @@ if gray == '.':
 else:
     for i in yellowwords:
         addword = 1
+        # checks each letter in the gray list
         for c in gray:
-            index = 0
             index = i.find(c)
-
+             
+            # if any letter in the word IS in the gray list, set to not add to word
             if index != -1:
                 addword = 0
-            
+
+        # to add or not to add  
         if addword == 1:
             goodwords.append(i)
             # print(i)
